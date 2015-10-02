@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app='kneeper'>
+  <head>
+    <meta charset="utf-8">
+    <title>Kneeper</title>
+    <link rel="stylesheet" href="/css/styles.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js" charset="utf-8"></script>
+    <script src="/js/app.js" type="text/javascript"></script>
+  </head>
+  <body>
+
+    <section ng-controller='LinksController'>
+        <!-- Above we are telling angular to use the controller code in app.js -->
+
+        <h3>  {{ welcomeMessage }}    </h3>
+
+        <form ng-submit="createLink()">
+
+          <input id="link" ng-model="newLink.url" type="text" placeholder="...url">
+          <input ng-model="newLink.comment" type="text" placeholder="...comments">
+          <input type="submit">
+        </form>
+
+
+          <ul>
+            <li ng-repeat="link in links">
+              <a id="url" href="{{ link.url }}">{{ link.url }}</a>
+              <button type="button" ng-click="removeLink(link)">Remove</button>
+            </li>
+          </ul>
+
+
+    </section>
+
+
+
+  </body>
+</html>
