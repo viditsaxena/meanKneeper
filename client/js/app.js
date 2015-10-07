@@ -5,7 +5,7 @@ angular.module('kneeper', ['ngCookies']);// dependency injection - Angular has a
 
 angular.module('kneeper')
   .controller('UsersController', ['$scope', '$http', '$cookies', function($scope, $http, $cookies){
-
+    console.log("yo!");
     $scope.welcomeMessage = "Hi there... Keep your knowledge in one place.";
     $scope.newUser = {};
     $scope.logInUser = {};
@@ -27,6 +27,7 @@ angular.module('kneeper')
     };
 
     $scope.getUser = function(){
+      console.log("im being called");
       $http({
         url: '/api/users/data',
         method: 'get',
@@ -34,10 +35,12 @@ angular.module('kneeper')
           token: $scope.token
         },
       }).then(function(response){
-        $scope.currentUserLibraries = response.libraries;
+        console.log('response', response);
+        $scope.currentUserLibraries = response.data.libraries;
+        // console.log($scope.currentUserLibraries);
       });
     }
-    $scope.getUser();
+
 
       // $scope.removeLink = function(link){
       //   var url = '/api/links/' + link._id;
@@ -70,6 +73,7 @@ angular.module('kneeper')
         $http.post("/api/users/authentication_token", $scope.logInUser).then(function(response){
           $scope.token = response.data.token;
           $cookies.put('token', $scope.token);
+          $scope.getUser();
           location.reload();
         });
       };
@@ -79,8 +83,9 @@ angular.module('kneeper')
         $scope.token = $cookies.get('token');
         location.reload();
       };
-
       $scope.token = $cookies.get('token');
+      $scope.getUser();
+
 
 
   }]);

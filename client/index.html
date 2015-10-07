@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.js"></script>
 
   </head>
-  <body>
+  <body ng-controller='UsersController'>
 
 <!-- NAVIGATION -->
     <nav class="white" role="navigation">
@@ -24,7 +24,7 @@
 
 
 <!-- MODALS -->
-        <ul class="right hide-on-med-and-down" ng-controller='UsersController'>
+        <ul class="right hide-on-med-and-down">
           <li ng-show="token" class="new-library">
             <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal3">
               <i class="material-icons">add</i>
@@ -85,7 +85,7 @@
         </ul>
 
         <!-- MOBILE NAV -->
-        <ul id="nav-mobile" class="side-nav" ng-controller='UsersController'>
+        <ul id="nav-mobile" class="side-nav">
           <!-- Modal Trigger -->
           <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign Up</a></li>
 
@@ -121,7 +121,7 @@
     </nav>
 
 <!-- Parallax 1   -->
-    <div ng-controller='UsersController' ng-hide="token" id="index-banner" class="parallax-container">
+    <div ng-hide="token" id="index-banner" class="parallax-container">
       <div class="section no-pad-bot">
         <div class="container">
           <br><br>
@@ -139,7 +139,7 @@
       <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
     </div>
 
-    <div ng-controller='UsersController' ng-hide="token" class="container">
+    <div ng-hide="token" class="container">
       <div class="section">
 
 <!--   Icon Section   -->
@@ -181,7 +181,7 @@
 
 <!-- Parallax 2   -->
 
-    <div ng-controller='UsersController' ng-hide="token" class="parallax-container valign-wrapper">
+    <div ng-hide="token" class="parallax-container valign-wrapper">
       <div class="section no-pad-bot">
         <div class="container">
           <div class="row center">
@@ -193,7 +193,7 @@
     </div>
 
 <!-- PROFILE -->
-<div ng-controller='UsersController' ng-show="token" class="parallax-container valign-wrapper">
+<div ng-show="token" class="parallax-container valign-wrapper">
   <div class="section no-pad-bot">
     <div class="container">
       <div class="row center">
@@ -204,23 +204,21 @@
   <div class="parallax"><img src="backgroundProfile.png" alt="Unsplashed background img 2"></div>
 </div>
 
-<div ng-controller='UsersController' ng-show="token">
+<div ng-show="token">
 
 <h4>Your Libraries</h4>
   <ul>
     <li ng-repeat="library in currentUserLibraries">
       {{ library.name }}
-    </li>
-  </ul>
-
       <ul>
-        <li ng-repeat="link in newLibrary.links">
+        <li ng-repeat="link in library.links">
           <input type="text" ng-model="link.url" placeholder="...url">
           <input type="text" ng-model="link.comment" placeholder="...comment">
         </li>
         <button type="button" ng-click="addLink()" name="button">+</button>
       </ul>
-
+    </li>
+  </ul>
 
 
   <div  ng-repeat="user in users">
@@ -243,7 +241,7 @@
 
   </div>
 <!-- PARALLEX 3 -->
-  <div ng-controller='UsersController' ng-hide="token" class="parallax-container valign-wrapper">
+  <div ng-hide="token" class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">

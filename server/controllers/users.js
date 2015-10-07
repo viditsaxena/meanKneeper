@@ -28,6 +28,7 @@ usersController.post('/authentication_token', function(req, res){
 });
 
 usersController.get('/data', function(req, res){
+  console.log(req.headers.token);
   User.findOne({token: req.headers.token}, function(err, user){
   res.json(user);
  });
