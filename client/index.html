@@ -15,13 +15,42 @@
 
   </head>
   <body>
+
+<!-- NAVIGATION -->
     <nav class="white" role="navigation">
       <div class="nav-wrapper container">
         <a id="logo-container" href="#" class="brand-logo">Kneeper</a>
 
+
+
 <!-- MODALS -->
         <ul class="right hide-on-med-and-down" ng-controller='UsersController'>
-          <li ng-hide="token" class="sign-up"><a class="waves-effect waves-light btn-flat modal-trigger" href="#modal1">Sign Up</a></li>
+          <li ng-show="token" class="new-library">
+            <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal3">
+              <i class="material-icons">add</i>
+            </a>
+          </li>
+
+          <div id="modal3" class="modal grey" class="new-library">
+            <div class="modal-content">
+              <h4 >Create A Library</h4>
+              <form ng-submit='createLibrary()'>
+                <input ng-model="newLibrary.name" type="text" placeholder='...name'>
+                <input type="submit">
+              </form>
+            </div>
+          </div>
+
+          <li ng-show="token" class="Log-Out">
+            <button class="waves-effect waves-light btn-flat"
+          type="button" ng-click="logOut()" name="button">LogOut
+            </button>
+          </li>
+
+          <li ng-hide="token" class="sign-up">
+            <a class="waves-effect waves-light btn-flat modal-trigger" href="#modal1">Sign Up
+            </a>
+          </li>
 
 
 
@@ -163,15 +192,26 @@
       <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
     </div>
 
-  
+<!-- PROFILE -->
+<div ng-controller='UsersController' ng-show="token" class="parallax-container valign-wrapper">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <div class="row center">
+        <h5 class="header col s12 black-text">Let the information you are interested in come to you.</h5>
+      </div>
+    </div>
+  </div>
+  <div class="parallax"><img src="backgroundProfile.png" alt="Unsplashed background img 2"></div>
+</div>
+
 <div ng-controller='UsersController' ng-show="token">
 
-  <h3 ng-show="token">You're logged in</h3>
-  <button ng-show="token" type="button" ng-click="logOut()" name="button">LogOut</button>
-
-  <div ng-show="token" class="new-library">
-    <form ng-submit='createLibrary()'>
-      <input ng-model="newLibrary.name" type="text" placeholder='...name'>
+<h4>Your Libraries</h4>
+  <ul>
+    <li ng-repeat="library in currentUserLibraries">
+      {{ library.name }}
+    </li>
+  </ul>
 
       <ul>
         <li ng-repeat="link in newLibrary.links">
@@ -181,9 +221,7 @@
         <button type="button" ng-click="addLink()" name="button">+</button>
       </ul>
 
-      <input type="submit">
-    </form>
-  </div>
+
 
   <div  ng-repeat="user in users">
     <span ng-click="user.librariesDisplay = !user.librariesDisplay">
@@ -204,7 +242,7 @@
   </div>
 
   </div>
-
+<!-- PARALLEX 3 -->
   <div ng-controller='UsersController' ng-hide="token" class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
       <div class="container">
@@ -216,6 +254,7 @@
     <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
+<!-- FOOTER -->
   <footer class="page-footer red darken-1">
     <div class="container">
       <div class="row">

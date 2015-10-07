@@ -9,6 +9,7 @@ angular.module('kneeper')
     $scope.welcomeMessage = "Hi there... Keep your knowledge in one place.";
     $scope.newUser = {};
     $scope.logInUser = {};
+    $scope.currentUserLibraries;
     $scope.newLibrary = {name: '', links:[{}]};
 
     $scope.getUsers = function(){
@@ -24,6 +25,19 @@ angular.module('kneeper')
         $scope.newUser = {};
       });
     };
+
+    $scope.getUser = function(){
+      $http({
+        url: '/api/users/data',
+        method: 'get',
+        headers:{
+          token: $scope.token
+        },
+      }).then(function(response){
+        $scope.currentUserLibraries = response.libraries;
+      });
+    }
+    $scope.getUser();
 
       // $scope.removeLink = function(link){
       //   var url = '/api/links/' + link._id;
@@ -63,6 +77,7 @@ angular.module('kneeper')
       $scope.logOut = function(){
         $cookies.remove('token');
         $scope.token = $cookies.get('token');
+        location.reload();
       };
 
       $scope.token = $cookies.get('token');
