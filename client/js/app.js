@@ -10,7 +10,9 @@ angular.module('kneeper')
     $scope.newUser = {};
     $scope.logInUser = {};
     $scope.currentUserLibraries;
+    // $scope.currentUserLinks;
     $scope.newLibrary = {name: '', links:[{}]};
+    $scope.newLink = {url: '', comment:''};
 
     $scope.getUsers = function(){
       $http.get('/api/users').then(function(response){
@@ -37,7 +39,6 @@ angular.module('kneeper')
       }).then(function(response){
         console.log('response', response);
         $scope.currentUserLibraries = response.data.libraries;
-        // console.log($scope.currentUserLibraries);
       });
     }
 
@@ -61,12 +62,27 @@ angular.module('kneeper')
           data: $scope.newLibrary
         }).then(function(response){
           $scope.getUsers();
-          $scope.newLibrary = {name: '', items:[{}]};
+          $scope.newLibrary = {name: '', links:[{}]};
         });
+        location.reload();
       };
 
-      $scope.addLink = function(){
-        $scope.newLibrary.links.push({});
+      $scope.addLink = function(library){
+        var id = library._id;
+        $http({
+          url:'/api/libraries/' + id + '/links',
+          // url:'/api/links',
+          method: 'post',
+          headers:{
+            token:$scope.token
+            // id:library._id
+          },
+          data: $scope.newLink
+        }).then(function(response){
+          console.log("Link", response);
+          $scope.getUser();
+          $scope.newLink = {url:'', comment:''};
+        });
       };
 
       $scope.obtainToken = function(){

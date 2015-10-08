@@ -12,10 +12,10 @@ var UserSchema = new mongoose.Schema({
   token: {type: String},
   libraries: [
     {
-      name: {type: String, require: true},
+      name: {type: String, required: true},
       links: [
         {
-          url: {type: String, require: true},
+          url: {type: String, required: true},
           comment: {type: String}
         }
       ]

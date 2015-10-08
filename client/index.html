@@ -33,10 +33,10 @@
 
           <div id="modal3" class="modal grey" class="new-library">
             <div class="modal-content">
-              <h4 >Create A Library</h4>
+              <h5>Create A Library</h5>
               <form ng-submit='createLibrary()'>
                 <input ng-model="newLibrary.name" type="text" placeholder='...name'>
-                <input type="submit">
+                <input class="modal-action modal-close waves-effect waves-red btn-flat" type="submit">
               </form>
             </div>
           </div>
@@ -61,7 +61,7 @@
               <form ng-submit="createUser()">
                 <input type="text" ng-model="newUser.username" placeholder="...username">
                 <input type="password" ng-model="newUser.password" placeholder="...password">
-                <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">
+                <input class="modal-action modal-close waves-effect waves-red btn-flat" type="submit">
 
               </form>
             </div>
@@ -77,7 +77,7 @@
               <form ng-submit="obtainToken()">
                 <input type="text" ng-model="logInUser.username" placeholder="...username">
                 <input type="password" ng-model="logInUser.password" placeholder="...password">
-                <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">
+                <input class="modal-action modal-close waves-effect waves-red btn-flat" type="submit">
               </form>
            </div>
 
@@ -130,7 +130,7 @@
             <h5 class="header col s12 dark">Keep all the great knowledge in one place</h5>
           </div>
           <div class="row center">
-            <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light red lighten-1">Get Started</a>
+            <a href="#modal1" id="download-button" class="btn-large waves-effect waves-light modal-trigger red lighten-1">Get Started</a>
           </div>
           <br><br>
 
@@ -197,7 +197,7 @@
   <div class="section no-pad-bot">
     <div class="container">
       <div class="row center">
-        <h5 class="header col s12 black-text">Let the information you are interested in come to you.</h5>
+        <img src="profile.png" alt=""><h5 class="header col s12 white-text">LL KOALA J</h5>
       </div>
     </div>
   </div>
@@ -205,8 +205,32 @@
 </div>
 
 <div ng-show="token">
+<div class="row">
+    <h4 class="col s5 offset-s5">Your Links</h4>
 
-<h4>Your Libraries</h4>
+     <div class="col s6 offset-s3">
+
+  <ul class="collapsible" data-collapsible="expandable">
+     <li ng-repeat="library in currentUserLibraries">
+     <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{ library.name }}</div>
+     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p>
+       <ul>
+         <li ng-repeat="link in library.links">
+         <input type="text" ng-model="link.url" placeholder="...url">
+         <input type="text" ng-model="link.comment" placeholder="...comment">
+         </li>
+         <button type="button" ng-click="addLink()" name="button">+</button>
+     </ul>
+    </div>
+   </li>
+
+ </ul>
+ </div>
+
+ </div>
+
+
+<!-- <h4>Your Libraries</h4>
   <ul>
     <li ng-repeat="library in currentUserLibraries">
       {{ library.name }}
@@ -218,26 +242,30 @@
         <button type="button" ng-click="addLink()" name="button">+</button>
       </ul>
     </li>
-  </ul>
+  </ul> -->
 
+  <!-- ng-repeat="user in users" -->
+  <!-- <div>
 
-  <div  ng-repeat="user in users">
-    <span ng-click="user.librariesDisplay = !user.librariesDisplay">
-      <h4>{{ user.username }}</h4>
-      <ul ng-show="user.librariesDisplay">
-        <li ng-repeat="library in user.libraries">
-          <p>
-            {{library.name}}
-            <ul>
+      <ul>
+        <li ng-repeat="library in currentUserLibraries">
+          <span ng-click="library.linksDisplay = !library.linksDisplay">
+          <p>  {{library.name}} </p>
+            <ul ng-show="library.linksDisplay">
               <li ng-repeat="link in library.links">
                 {{link.url}} - {{link.comment}}
               </li>
+              <form ng-submit='addLink(library)'>
+              <input type="text" ng-model="newLink.url" placeholder="...url">
+              <input type="text" ng-model="newLink.comment" placeholder="...comment">
+              <input type="submit">
+              </form>
             </ul>
-          </p>
+          </span>
         </li>
       </ul>
-    </span>
-  </div>
+
+  </div> -->
 
   </div>
 <!-- PARALLEX 3 -->
@@ -245,7 +273,7 @@
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+          <h5 class="header col s12 light">Information is only helpful if you have access to it when you need it.</h5>
         </div>
       </div>
     </div>
@@ -253,7 +281,7 @@
   </div>
 
 <!-- FOOTER -->
-  <footer class="page-footer red darken-1">
+  <footer ng-hide='token' class="page-footer red darken-1">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">

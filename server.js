@@ -37,6 +37,8 @@ var express     =  require('express'),
     app.use('/api/users', UsersController);
     var LibrariesController = require('./server/controllers/libraries');
     app.use('/api/libraries', LibrariesController);
+    var LinksController = require('./server/controllers/links');
+    app.use('/api/links', LinksController);
 
     app.listen('8080', function(){
       console.log('...listening on port 8080');
