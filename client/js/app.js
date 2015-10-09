@@ -37,7 +37,7 @@ angular.module('kneeper')
           token: $scope.token
         },
       }).then(function(response){
-        console.log('response', response);
+        // console.log('response', response);
         $scope.currentUserLibraries = response.data.libraries;
       });
     }
@@ -61,29 +61,31 @@ angular.module('kneeper')
           },
           data: $scope.newLibrary
         }).then(function(response){
+          console.log('response', response);
+
           $scope.getUsers();
           $scope.newLibrary = {name: '', links:[{}]};
         });
         location.reload();
       };
 
-      $scope.addLink = function(library){
-        var id = library._id;
-        $http({
-          url:'/api/libraries/' + id + '/links',
-          // url:'/api/links',
-          method: 'post',
-          headers:{
-            token:$scope.token
-            // id:library._id
-          },
-          data: $scope.newLink
-        }).then(function(response){
-          console.log("Link", response);
-          $scope.getUser();
-          $scope.newLink = {url:'', comment:''};
-        });
-      };
+      // $scope.addLink = function(library){
+      //   var id = library._id;
+      //   $http({
+      //     url:'/api/libraries/' + id + '/links',
+      //     // url:'/api/links',
+      //     method: 'post',
+      //     headers:{
+      //       token:$scope.token
+      //       // id:library._id
+      //     },
+      //     data: $scope.newLink
+      //   }).then(function(response){
+      //     console.log("Link", response);
+      //     $scope.getUser();
+      //     $scope.newLink = {url:'', comment:''};
+      //   });
+      // };
 
       $scope.obtainToken = function(){
         $http.post("/api/users/authentication_token", $scope.logInUser).then(function(response){
